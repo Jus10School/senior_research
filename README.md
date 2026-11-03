@@ -1,2 +1,3 @@
-# senior_research
-Senior research project
+## A Comparative Performance and Security Analysis of AES Modes in Image Encryption
+
+The Advanced Encryption Standard (AES) is an encryption algorithm used to turn data into an unreadable format. In AES, data is split into fixed block sizes before encryption. To handle the encryption of each block, modes of operation are used to define how these blocks are processed. This project involves using these different modes to encrypt a set of images. The main objective of this project is to qualitatively and quantitatively compare the encrypted outputs from each mode. This comparison aims to highlight the importance of mode selection for image encryption security.
