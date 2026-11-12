@@ -1,10 +1,11 @@
-"""Run AES-128-ECB and CBC experiments on the PNG images."""
+"""Run AES-128-ECB, CBC, and CFB experiments on the PNG images."""
 
 from pathlib import Path
 from secrets import token_bytes
 from time import perf_counter
 
 from encryption.cbc import encrypt_cbc
+from encryption.cfb import encrypt_cfb
 from encryption.ecb import encrypt_ecb
 from preprocessing import load_png_pixel_bytes
 
@@ -25,6 +26,7 @@ def _encrypt_ecb(
 ENCRYPTION_MODES = (
     ("ecb", _encrypt_ecb),
     ("cbc", encrypt_cbc),
+    ("cfb", encrypt_cfb),
 )
 
 
