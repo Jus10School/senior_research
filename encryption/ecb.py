@@ -1,4 +1,4 @@
-"""Reusable functions for encrypting image pixel data."""
+"""AES-128-ECB encryption for decoded pixel data."""
 
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
