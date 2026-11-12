@@ -2,7 +2,8 @@
 
 from secrets import token_bytes
 
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.decrepit.ciphers.modes import CFB
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms
 
 
 def encrypt_cfb(pixel_data: bytes, key: bytes) -> tuple[bytes, bytes]:
@@ -11,6 +12,6 @@ def encrypt_cfb(pixel_data: bytes, key: bytes) -> tuple[bytes, bytes]:
         raise ValueError("AES-128 requires a 16-byte key")
 
     iv = token_bytes(algorithms.AES.block_size // 8)
-    encryptor = Cipher(algorithms.AES(key), modes.CFB(iv)).encryptor()
+    encryptor = Cipher(algorithms.AES(key), CFB(iv)).encryptor()
     ciphertext = encryptor.update(pixel_data) + encryptor.finalize()
     return iv, ciphertext

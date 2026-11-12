@@ -1,4 +1,4 @@
-"""Run AES-128-ECB, CBC, CFB, and CTR experiments on the PNG images."""
+"""Run AES-128-ECB, CBC, CFB, OFB, and CTR experiments on the PNG images."""
 
 from pathlib import Path
 from secrets import token_bytes
@@ -8,6 +8,7 @@ from encryption.cbc import encrypt_cbc
 from encryption.cfb import encrypt_cfb
 from encryption.ctr import encrypt_ctr
 from encryption.ecb import encrypt_ecb
+from encryption.ofb import encrypt_ofb
 from preprocessing import load_png_pixel_bytes
 
 from PIL import Image
@@ -35,6 +36,7 @@ ENCRYPTION_MODES = (
     ("ecb", _encrypt_ecb),
     ("cbc", encrypt_cbc),
     ("cfb", encrypt_cfb),
+    ("ofb", encrypt_ofb),
     ("ctr", _encrypt_ctr),
 )
 
