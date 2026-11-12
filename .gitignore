@@ -1,3 +1,5 @@
 /encrypted/
+/results/encrypted/*
+!/results/encrypted/.gitkeep
 __pycache__/
 .DS_Store

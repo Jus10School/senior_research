@@ -1,17 +1,18 @@
 """Run AES-128-ECB experiments on the PNG images in the Images folder."""
 
-from getpass import getpass
 from pathlib import Path
+from secrets import token_bytes
 from time import perf_counter
 
-from encrypt import encrypt_ecb
+from encryption.ecb import encrypt_ecb
 from preprocessing import load_png_pixel_bytes
+
 from PIL import Image
 
 
 PROJECT_DIR = Path(__file__).resolve().parent
 IMAGE_DIR = PROJECT_DIR / "Images"
-OUTPUT_DIR = PROJECT_DIR / "encrypted"
+OUTPUT_DIR = PROJECT_DIR / "results" / "encrypted"
 
 
 def run_experiment(
@@ -48,15 +49,7 @@ def run_experiment(
 
 
 def main() -> None:
-    key_text = getpass("Enter AES-128 key (32 hexadecimal characters): ").strip()
-    try:
-        key = bytes.fromhex(key_text)
-    except ValueError as exc:
-        raise ValueError("The key must contain only hexadecimal characters") from exc
-    if len(key) != 16:
-        raise ValueError("AES-128 requires a 32-character hexadecimal key")
-
-    run_experiment(key)
+    run_experiment(token_bytes(16))
 
 
 if __name__ == "__main__":
