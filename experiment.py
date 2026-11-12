@@ -3,15 +3,18 @@
 from pathlib import Path
 from secrets import token_bytes
 from time import perf_counter
-
-from encryption.cbc import encrypt_cbc
-from encryption.cfb import encrypt_cfb
-from encryption.ctr import encrypt_ctr
-from encryption.ecb import encrypt_ecb
-from encryption.ofb import encrypt_ofb
+from PIL import Image
 from preprocessing import load_png_pixel_bytes
 
-from PIL import Image
+from encryption import (
+    encrypt_cbc,
+    encrypt_cfb,
+    encrypt_ctr,
+    encrypt_ecb,
+    encrypt_ofb,
+)
+
+
 
 
 PROJECT_DIR = Path(__file__).resolve().parent
@@ -21,15 +24,8 @@ OUTPUT_DIR = PROJECT_DIR / "results" / "encrypted"
 
 def _encrypt_ecb(
     pixel_data: bytes, key: bytes
-) -> tuple[bytes | None, bytes]:
-    return None, encrypt_ecb(pixel_data, key)
-
-
-def _encrypt_ctr(
-    pixel_data: bytes, key: bytes
-) -> tuple[bytes, bytes]:
-    ciphertext, initial_counter = encrypt_ctr(pixel_data, key)
-    return initial_counter, ciphertext
+) -> tuple[bytes, None]:
+    return encrypt_ecb(pixel_data, key), None
 
 
 ENCRYPTION_MODES = (
@@ -37,7 +33,7 @@ ENCRYPTION_MODES = (
     ("cbc", encrypt_cbc),
     ("cfb", encrypt_cfb),
     ("ofb", encrypt_ofb),
-    ("ctr", _encrypt_ctr),
+    ("ctr", encrypt_ctr),
 )
 
 
@@ -59,15 +55,19 @@ def run_experiment(
 
         for mode_name, encrypt in ENCRYPTION_MODES:
             start = perf_counter()
-            iv, ciphertext = encrypt(pixel_data, key)
+            ciphertext, mode_parameter = encrypt(pixel_data, key)
             elapsed = perf_counter() - start
 
             mode_output_dir = output_dir / mode_name
             mode_output_dir.mkdir(parents=True, exist_ok=True)
             ciphertext_path = mode_output_dir / f"{image_path.stem}.bin"
             ciphertext_path.write_bytes(ciphertext)
-            if iv is not None:
-                (mode_output_dir / f"{image_path.stem}.iv").write_bytes(iv)
+            if mode_parameter is not None:
+                parameter_suffix = ".counter" if mode_name == "ctr" else ".iv"
+                parameter_path = (
+                    mode_output_dir / f"{image_path.stem}{parameter_suffix}"
+                )
+                parameter_path.write_bytes(mode_parameter)
 
             preview_path = mode_output_dir / f"{image_path.stem}_encrypted.png"
             Image.frombytes(
