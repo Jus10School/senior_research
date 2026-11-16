@@ -31,6 +31,7 @@ class ExperimentTests(unittest.TestCase):
                     image_directory / f"{name}.png"
                 )
             entropy_path = root / "metrics" / "entropy.csv"
+            correlation_path = root / "metrics" / "correlation.csv"
             encrypted_directory = root / "encrypted"
 
             run_experiment(
@@ -38,10 +39,15 @@ class ExperimentTests(unittest.TestCase):
                 image_dir=image_directory,
                 output_dir=encrypted_directory,
                 entropy_output_path=entropy_path,
+                correlation_output_path=correlation_path,
             )
 
             with entropy_path.open(newline="", encoding="utf-8") as entropy_file:
                 rows = list(csv.DictReader(entropy_file))
+            with correlation_path.open(
+                newline="", encoding="utf-8"
+            ) as correlation_file:
+                correlation_rows = list(csv.DictReader(correlation_file))
 
             self.assertEqual(len(rows), len(ENCRYPTION_MODES) * 2)
             self.assertEqual(
@@ -59,6 +65,30 @@ class ExperimentTests(unittest.TestCase):
                 all(
                     0.0 <= float(row["shannon_entropy_bits_per_byte"]) <= 8.0
                     for row in rows
+                )
+            )
+            self.assertEqual(len(correlation_rows), len(rows))
+            self.assertEqual(
+                {
+                    (row["image"], row["mode"])
+                    for row in correlation_rows
+                },
+                {(row["image"], row["mode"]) for row in rows},
+            )
+            self.assertTrue(
+                all(
+                    row[f"original_{direction}"] == ""
+                    for row in correlation_rows
+                    if row["image"] == "sample.png"
+                    for direction in ("horizontal", "vertical", "diagonal")
+                )
+            )
+            self.assertTrue(
+                all(
+                    not value or len(value.partition(".")[2]) == 6
+                    for row in correlation_rows
+                    for key, value in row.items()
+                    if key.startswith(("original_", "encrypted_"))
                 )
             )
             for mode_name, _ in ENCRYPTION_MODES:
