@@ -1,9 +1,13 @@
 """Run AES-128-ECB, CBC, CFB, OFB, and CTR experiments on the PNG images."""
 
+import csv
 from pathlib import Path
 from secrets import token_bytes
 from time import perf_counter
+
 from PIL import Image
+
+from analysis.entropy import calculate_shannon_entropy
 from preprocessing import load_png_pixel_bytes
 
 from encryption import (
@@ -20,6 +24,8 @@ from encryption import (
 PROJECT_DIR = Path(__file__).resolve().parent
 IMAGE_DIR = PROJECT_DIR / "Images"
 OUTPUT_DIR = PROJECT_DIR / "results" / "encrypted"
+ENTROPY_OUTPUT_PATH = PROJECT_DIR / "results" / "metrics" / "entropy.csv"
+GRAYSCALE_IMAGE_STEMS = frozenset({"Pattern 1", "Pattern 2", "Pattern 3"})
 
 
 def _encrypt_ecb(
@@ -41,22 +47,26 @@ def run_experiment(
     key: bytes,
     image_dir: Path = IMAGE_DIR,
     output_dir: Path = OUTPUT_DIR,
+    entropy_output_path: Path = ENTROPY_OUTPUT_PATH,
 ) -> None:
     images = sorted(image_dir.glob("*.png"))
     if not images:
         raise FileNotFoundError(f"No PNG images found in {image_dir}")
 
     output_dir.mkdir(parents=True, exist_ok=True)
+    entropy_results = []
     for image_path in images:
-        pixel_data = load_png_pixel_bytes(image_path)
+        pixel_mode = "L" if image_path.stem in GRAYSCALE_IMAGE_STEMS else "RGB"
+        pixel_data = load_png_pixel_bytes(image_path, pixel_mode)
         with Image.open(image_path) as image:
             image_size = image.size
-        preview_byte_count = image_size[0] * image_size[1] * 3
 
         for mode_name, encrypt in ENCRYPTION_MODES:
             start = perf_counter()
             ciphertext, mode_parameter = encrypt(pixel_data, key)
             elapsed = perf_counter() - start
+            entropy = calculate_shannon_entropy(ciphertext)
+            entropy_results.append((image_path.name, mode_name, entropy))
 
             mode_output_dir = output_dir / mode_name
             mode_output_dir.mkdir(parents=True, exist_ok=True)
@@ -71,14 +81,21 @@ def run_experiment(
 
             preview_path = mode_output_dir / f"{image_path.stem}_encrypted.png"
             Image.frombytes(
-                "RGB", image_size, ciphertext[:preview_byte_count]
+                pixel_mode, image_size, ciphertext[: len(pixel_data)]
             ).save(preview_path)
 
             print(
                 f"{image_path.name} ({mode_name.upper()}): "
                 f"{len(ciphertext)} encrypted bytes in {elapsed:.6f} seconds "
+                f"with {entropy:.6f} bits/byte entropy "
                 f"-> {ciphertext_path}; preview -> {preview_path}"
             )
+
+    entropy_output_path.parent.mkdir(parents=True, exist_ok=True)
+    with entropy_output_path.open("w", newline="", encoding="utf-8") as entropy_file:
+        writer = csv.writer(entropy_file)
+        writer.writerow(("image", "mode", "shannon_entropy_bits_per_byte"))
+        writer.writerows(entropy_results)
 
 
 def main() -> None:
