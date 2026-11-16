@@ -1,0 +1,31 @@
+image,mode,shannon_entropy_bits_per_byte
+Kitties.png,ecb,7.999961737337287
+Kitties.png,cbc,7.999989550957222
+Kitties.png,cfb,7.999989843700207
+Kitties.png,ofb,7.999989363568687
+Kitties.png,ctr,7.999991365047469
+PR.png,ecb,7.978088382404515
+PR.png,cbc,7.999990399214244
+PR.png,cfb,7.999989654166538
+PR.png,ofb,7.999990847010877
+PR.png,ctr,7.999989871433941
+Pattern 1.png,ecb,6.246869945887801
+Pattern 1.png,cbc,7.999965187429285
+Pattern 1.png,cfb,7.9999737520270005
+Pattern 1.png,ofb,7.999969520374706
+Pattern 1.png,ctr,7.999966881078742
+Pattern 2.png,ecb,7.6861621051670435
+Pattern 2.png,cbc,7.99996853507836
+Pattern 2.png,cfb,7.99996885090077
+Pattern 2.png,ofb,7.999972871684864
+Pattern 2.png,ctr,7.999975604143781
+Pattern 3.png,ecb,7.844988266480227
+Pattern 3.png,cbc,7.999968206405459
+Pattern 3.png,cfb,7.9999691179037375
+Pattern 3.png,ofb,7.999971163529997
+Pattern 3.png,ctr,7.999969634708428
+Vermont.png,ecb,7.999848402566123
+Vermont.png,cbc,7.99999037017642
+Vermont.png,cfb,7.99999150894491
+Vermont.png,ofb,7.999991706770539
+Vermont.png,ctr,7.999988916492077
