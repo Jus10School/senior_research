@@ -32,6 +32,7 @@ class ExperimentTests(unittest.TestCase):
                 )
             entropy_path = root / "metrics" / "entropy.csv"
             correlation_path = root / "metrics" / "correlation.csv"
+            ssim_path = root / "metrics" / "ssim.csv"
             encrypted_directory = root / "encrypted"
 
             run_experiment(
@@ -40,6 +41,7 @@ class ExperimentTests(unittest.TestCase):
                 output_dir=encrypted_directory,
                 entropy_output_path=entropy_path,
                 correlation_output_path=correlation_path,
+                ssim_output_path=ssim_path,
             )
 
             with entropy_path.open(newline="", encoding="utf-8") as entropy_file:
@@ -48,6 +50,8 @@ class ExperimentTests(unittest.TestCase):
                 newline="", encoding="utf-8"
             ) as correlation_file:
                 correlation_rows = list(csv.DictReader(correlation_file))
+            with ssim_path.open(newline="", encoding="utf-8") as ssim_file:
+                ssim_rows = list(csv.DictReader(ssim_file))
 
             self.assertEqual(len(rows), len(ENCRYPTION_MODES) * 2)
             self.assertEqual(
@@ -89,6 +93,18 @@ class ExperimentTests(unittest.TestCase):
                     for row in correlation_rows
                     for key, value in row.items()
                     if key.startswith(("original_", "encrypted_"))
+                )
+            )
+            self.assertEqual(len(ssim_rows), len(rows))
+            self.assertEqual(
+                {(row["image"], row["mode"]) for row in ssim_rows},
+                {(row["image"], row["mode"]) for row in rows},
+            )
+            self.assertTrue(
+                all(
+                    len(row["ssim"].partition(".")[2]) == 6
+                    and -1.0 <= float(row["ssim"]) <= 1.0
+                    for row in ssim_rows
                 )
             )
             for mode_name, _ in ENCRYPTION_MODES:

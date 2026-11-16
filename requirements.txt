@@ -1,3 +1,4 @@
 cryptography
 Pillow
 numpy
+scikit-image

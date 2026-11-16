@@ -9,6 +9,7 @@ from PIL import Image
 
 from analysis.correlation import calculate_adjacent_pixel_correlation
 from analysis.entropy import calculate_shannon_entropy
+from analysis.ssim import calculate_ssim
 from preprocessing import load_png_pixel_bytes
 
 from encryption import (
@@ -27,6 +28,7 @@ IMAGE_DIR = PROJECT_DIR / "Images"
 OUTPUT_DIR = PROJECT_DIR / "results" / "encrypted"
 ENTROPY_OUTPUT_PATH = PROJECT_DIR / "results" / "metrics" / "entropy.csv"
 CORRELATION_OUTPUT_PATH = PROJECT_DIR / "results" / "metrics" / "correlation.csv"
+SSIM_OUTPUT_PATH = PROJECT_DIR / "results" / "metrics" / "ssim.csv"
 GRAYSCALE_IMAGE_STEMS = frozenset({"Pattern 1", "Pattern 2", "Pattern 3"})
 CORRELATION_DIRECTIONS = ("horizontal", "vertical", "diagonal")
 
@@ -52,6 +54,7 @@ def run_experiment(
     output_dir: Path = OUTPUT_DIR,
     entropy_output_path: Path = ENTROPY_OUTPUT_PATH,
     correlation_output_path: Path = CORRELATION_OUTPUT_PATH,
+    ssim_output_path: Path = SSIM_OUTPUT_PATH,
 ) -> None:
     images = sorted(image_dir.glob("*.png"))
     if not images:
@@ -60,6 +63,7 @@ def run_experiment(
     output_dir.mkdir(parents=True, exist_ok=True)
     entropy_results = []
     correlation_results = []
+    ssim_results = []
     for image_path in images:
         pixel_mode = "L" if image_path.stem in GRAYSCALE_IMAGE_STEMS else "RGB"
         pixel_data = load_png_pixel_bytes(image_path, pixel_mode)
@@ -79,6 +83,10 @@ def run_experiment(
             encrypted_correlations = calculate_adjacent_pixel_correlation(
                 ciphertext[: len(pixel_data)], image_size, channels
             )
+            ssim_score = calculate_ssim(
+                pixel_data, ciphertext[: len(pixel_data)], image_size, channels
+            )
+            ssim_results.append((image_path.name, mode_name, ssim_score))
             correlation_results.append(
                 (
                     image_path.name,
@@ -114,6 +122,7 @@ def run_experiment(
                 f"{image_path.name} ({mode_name.upper()}): "
                 f"{len(ciphertext)} encrypted bytes in {elapsed:.6f} seconds "
                 f"with {entropy:.6f} bits/byte entropy "
+                f"and SSIM {ssim_score:.6f} "
                 f"-> {ciphertext_path}; preview -> {preview_path}"
             )
 
@@ -146,6 +155,15 @@ def run_experiment(
                 ),
             )
             for image_name, mode_name, *values in correlation_results
+        )
+
+    ssim_output_path.parent.mkdir(parents=True, exist_ok=True)
+    with ssim_output_path.open("w", newline="", encoding="utf-8") as ssim_file:
+        writer = csv.writer(ssim_file, lineterminator="\n")
+        writer.writerow(("image", "mode", "ssim"))
+        writer.writerows(
+            (image_name, mode_name, f"{score:.6f}")
+            for image_name, mode_name, score in ssim_results
         )
 
 

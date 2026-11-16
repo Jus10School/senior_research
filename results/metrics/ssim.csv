@@ -1,0 +1,31 @@
+image,mode,ssim
+Kitties.png,ecb,0.009901
+Kitties.png,cbc,0.009825
+Kitties.png,cfb,0.009837
+Kitties.png,ofb,0.009809
+Kitties.png,ctr,0.009833
+PR.png,ecb,0.008161
+PR.png,cbc,0.007930
+PR.png,cfb,0.008071
+PR.png,ofb,0.007728
+PR.png,ctr,0.007844
+Pattern 1.png,ecb,0.008534
+Pattern 1.png,cbc,0.004801
+Pattern 1.png,cfb,0.004826
+Pattern 1.png,ofb,0.004772
+Pattern 1.png,ctr,0.004887
+Pattern 2.png,ecb,0.003145
+Pattern 2.png,cbc,0.006802
+Pattern 2.png,cfb,0.006736
+Pattern 2.png,ofb,0.006788
+Pattern 2.png,ctr,0.006813
+Pattern 3.png,ecb,0.003341
+Pattern 3.png,cbc,0.003538
+Pattern 3.png,cfb,0.003863
+Pattern 3.png,ofb,0.003823
+Pattern 3.png,ctr,0.003990
+Vermont.png,ecb,0.009251
+Vermont.png,cbc,0.009201
+Vermont.png,cfb,0.009295
+Vermont.png,ofb,0.009143
+Vermont.png,ctr,0.009255
