@@ -1,0 +1,31 @@
+image,mode,cpu_time_seconds,throughput_MB_per_second
+Kitties.png,ecb,0.030107,619.869133
+Kitties.png,cbc,0.080299,232.411363
+Kitties.png,cfb,0.081929,227.787475
+Kitties.png,ofb,0.124993,149.307561
+Kitties.png,ctr,0.030180,618.369781
+PR.png,ecb,0.016777,1112.380044
+PR.png,cbc,0.039506,472.394067
+PR.png,cfb,0.063096,295.777862
+PR.png,ofb,0.116462,160.244543
+PR.png,ctr,0.152030,122.754719
+Pattern 1.png,ecb,0.081995,75.868041
+Pattern 1.png,cbc,0.092984,66.901833
+Pattern 1.png,cfb,0.028332,219.567980
+Pattern 1.png,ofb,0.055200,112.695652
+Pattern 1.png,ctr,0.004484,1387.332739
+Pattern 2.png,ecb,0.015670,396.987875
+Pattern 2.png,cbc,0.039439,157.732194
+Pattern 2.png,cfb,0.039994,155.543331
+Pattern 2.png,ofb,0.037291,166.817731
+Pattern 2.png,ctr,0.009017,689.896861
+Pattern 3.png,ecb,0.027429,226.796456
+Pattern 3.png,cbc,0.076798,81.002109
+Pattern 3.png,cfb,0.099960,62.232893
+Pattern 3.png,ofb,0.012778,486.836751
+Pattern 3.png,ctr,0.022077,281.777415
+Vermont.png,ecb,0.225793,82.652695
+Vermont.png,cbc,0.158393,117.823389
+Vermont.png,cfb,0.146431,127.448423
+Vermont.png,ofb,0.148336,125.811671
+Vermont.png,ctr,0.038221,488.276079
