@@ -1,31 +1,31 @@
 image,mode,cpu_time_seconds,throughput_MB_per_second
-Kitties.png,ecb,0.030107,619.869133
-Kitties.png,cbc,0.080299,232.411363
-Kitties.png,cfb,0.081929,227.787475
-Kitties.png,ofb,0.124993,149.307561
-Kitties.png,ctr,0.030180,618.369781
-PR.png,ecb,0.016777,1112.380044
-PR.png,cbc,0.039506,472.394067
-PR.png,cfb,0.063096,295.777862
-PR.png,ofb,0.116462,160.244543
-PR.png,ctr,0.152030,122.754719
-Pattern 1.png,ecb,0.081995,75.868041
-Pattern 1.png,cbc,0.092984,66.901833
-Pattern 1.png,cfb,0.028332,219.567980
-Pattern 1.png,ofb,0.055200,112.695652
-Pattern 1.png,ctr,0.004484,1387.332739
-Pattern 2.png,ecb,0.015670,396.987875
-Pattern 2.png,cbc,0.039439,157.732194
-Pattern 2.png,cfb,0.039994,155.543331
-Pattern 2.png,ofb,0.037291,166.817731
-Pattern 2.png,ctr,0.009017,689.896861
-Pattern 3.png,ecb,0.027429,226.796456
-Pattern 3.png,cbc,0.076798,81.002109
-Pattern 3.png,cfb,0.099960,62.232893
-Pattern 3.png,ofb,0.012778,486.836751
-Pattern 3.png,ctr,0.022077,281.777415
-Vermont.png,ecb,0.225793,82.652695
-Vermont.png,cbc,0.158393,117.823389
-Vermont.png,cfb,0.146431,127.448423
-Vermont.png,ofb,0.148336,125.811671
-Vermont.png,ctr,0.038221,488.276079
+Kitties.png,ecb,0.036937,668.883573
+Kitties.png,cbc,0.097761,206.024120
+Kitties.png,cfb,0.105277,184.233153
+Kitties.png,ofb,0.093214,210.027840
+Kitties.png,ctr,0.062328,405.669435
+PR.png,ecb,0.061774,456.026181
+PR.png,cbc,0.091692,239.965133
+PR.png,cfb,0.096101,228.791210
+PR.png,ofb,0.181206,108.786099
+PR.png,ctr,0.065181,432.546083
+Pattern 1.png,ecb,0.059637,143.265769
+Pattern 1.png,cbc,0.042636,199.869108
+Pattern 1.png,cfb,0.071740,123.614065
+Pattern 1.png,ofb,0.051483,176.288303
+Pattern 1.png,ctr,0.048949,192.803489
+Pattern 2.png,ecb,0.070140,107.428802
+Pattern 2.png,cbc,0.065236,108.844199
+Pattern 2.png,cfb,0.069604,115.921948
+Pattern 2.png,ofb,0.054268,153.273916
+Pattern 2.png,ctr,0.058352,170.419722
+Pattern 3.png,ecb,0.069394,157.870492
+Pattern 3.png,cbc,0.036585,225.007322
+Pattern 3.png,cfb,0.068137,107.466905
+Pattern 3.png,ofb,0.060475,132.799635
+Pattern 3.png,ctr,0.065313,176.090435
+Vermont.png,ecb,0.070118,388.065732
+Vermont.png,cbc,0.075740,267.955881
+Vermont.png,cfb,0.087020,248.464276
+Vermont.png,ofb,0.119766,190.699503
+Vermont.png,ctr,0.073320,359.255702

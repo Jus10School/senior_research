@@ -1,31 +1,31 @@
 image,mode,ssim
-Kitties.png,ecb,0.009934
-Kitties.png,cbc,0.009833
-Kitties.png,cfb,0.009815
-Kitties.png,ofb,0.009815
-Kitties.png,ctr,0.009792
-PR.png,ecb,0.008394
-PR.png,cbc,0.007944
-PR.png,cfb,0.008042
-PR.png,ofb,0.008085
-PR.png,ctr,0.007891
-Pattern 1.png,ecb,0.002131
-Pattern 1.png,cbc,0.004824
-Pattern 1.png,cfb,0.004858
-Pattern 1.png,ofb,0.004747
-Pattern 1.png,ctr,0.004835
-Pattern 2.png,ecb,0.003745
-Pattern 2.png,cbc,0.006942
-Pattern 2.png,cfb,0.006827
-Pattern 2.png,ofb,0.006792
-Pattern 2.png,ctr,0.006792
-Pattern 3.png,ecb,0.003734
-Pattern 3.png,cbc,0.003619
-Pattern 3.png,cfb,0.003811
-Pattern 3.png,ofb,0.003878
-Pattern 3.png,ctr,0.003804
-Vermont.png,ecb,0.009261
-Vermont.png,cbc,0.009085
-Vermont.png,cfb,0.009187
-Vermont.png,ofb,0.009135
-Vermont.png,ctr,0.009234
+Kitties.png,ecb,0.009859
+Kitties.png,cbc,0.009816
+Kitties.png,cfb,0.009813
+Kitties.png,ofb,0.009817
+Kitties.png,ctr,0.009814
+PR.png,ecb,0.008034
+PR.png,cbc,0.007920
+PR.png,cfb,0.007912
+PR.png,ofb,0.007867
+PR.png,ctr,0.007940
+Pattern 1.png,ecb,0.007299
+Pattern 1.png,cbc,0.004811
+Pattern 1.png,cfb,0.004819
+Pattern 1.png,ofb,0.004809
+Pattern 1.png,ctr,0.004825
+Pattern 2.png,ecb,0.009518
+Pattern 2.png,cbc,0.006732
+Pattern 2.png,cfb,0.006750
+Pattern 2.png,ofb,0.006750
+Pattern 2.png,ctr,0.006746
+Pattern 3.png,ecb,0.004246
+Pattern 3.png,cbc,0.003731
+Pattern 3.png,cfb,0.003737
+Pattern 3.png,ofb,0.003759
+Pattern 3.png,ctr,0.003780
+Vermont.png,ecb,0.009209
+Vermont.png,cbc,0.009179
+Vermont.png,cfb,0.009175
+Vermont.png,ofb,0.009157
+Vermont.png,ctr,0.009181

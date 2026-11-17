@@ -119,7 +119,7 @@ def run_experiment(
     correlation_output_path: Path = CORRELATION_OUTPUT_PATH,
     ssim_output_path: Path = SSIM_OUTPUT_PATH,
     performance_output_path: Path = PERFORMANCE_OUTPUT_PATH,
-    cycles: int = 10,
+    cycles: int = 30,
     workers: int | None = None,
 ) -> None:
     if cycles <= 0:
@@ -312,8 +312,8 @@ def main() -> None:
     parser.add_argument(
         "--cycles",
         type=int,
-        default=10,
-        help="Number of random-key sampling cycles to run (default: 10).",
+        default=30,
+        help="Number of random-key sampling cycles to run (default: 30).",
     )
     parser.add_argument(
         "--workers",
